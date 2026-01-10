@@ -41,6 +41,5 @@ $dados <<EOD
 16	1
 EOD
 
-
 plot log(x)/log(3) w l lw 4, \
 	$dados w p pt 7 title sprintf("Potencias de 3 para 3^y = x \(mod p\) com p = %d", p)
