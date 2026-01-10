@@ -1,0 +1,28 @@
+set xlabel "x"
+set ylabel "f(x)"
+set xrange [-30:30]
+set yrange [-140:140]
+set samples 100000
+
+set xzeroaxis
+set yzeroaxis
+
+set title "Elliptic curve and points"
+set key top left
+
+set label 1 "P = (3, 8)" at 3, 8 offset 0,-1
+set label 2 "2P = (-5, -16)" at -5, -16 offset 0,1
+set label 3 "4P = (11, 32)" at 11, 32 offset 0,-1
+set label 4 "8P = (3, 8)" at 3, 8 offset -1,1
+
+#Dados inline
+$dados <<EOD
+3	8	#P
+-5	-16	#2P
+11	32	#4P
+3	8	#8P
+EOD
+
+plot sqrt(x**3 - 43*x + 166) w l lw 2 lc rgb "blue", \
+	-sqrt(x**3 - 43*x + 166) w l lw 2 lc rgb "blue" notitle, \
+	$dados u 1:2 w p pt 7 ps 2 title "pontos P, 2P, 4P, 8P"
