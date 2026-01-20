@@ -1,0 +1,38 @@
+#Script para plotagem do desempenho das semanas
+
+set style data histograms
+set style histogram rowstacked
+set style fill solid 1.0 border -1
+set boxwidth 0.8
+
+set xlabel "Semanas"
+set ylabel "Desempenho"
+set xrange [-1:]
+set key outside
+
+set title "Desempenho de tarefas das semanas"
+
+set xtics rotate by -45
+
+stats 'dadosPlanejamento.dat' u 2 nooutput
+m2 = STATS_mean 	#media coluna 2
+
+stats 'dadosPlanejamento.dat' u 3 nooutput
+m3 = STATS_mean 	#media coluna 3
+
+stats 'dadosPlanejamento.dat' u 4 nooutput
+m4 = STATS_mean		#media coluna 4
+
+stats 'dadosPlanejamento.dat' u (($2+$3+$4)/3.0) nooutput
+mt = STATS_mean		#media total
+
+set datafile commentschars "#"
+
+plot 'dadosPlanejamento.dat' u 2:xtic(1) lc rgb "green" title 'Êxito', \
+	'' u 3 lc rgb "orange" title 'Incompleto', \
+	'' u 4 lc rgb "red" title 'Fracasso', \
+	m2 w l lw 2 dt 2 lc rgb "green" title sprintf("Média êxito: %d", m2), \
+	m3 w l lw 2 dt 3 lc rgb "orange" title sprintf("Média incompleto: %d", m3), \
+	m4 w l lw 2 dt 4 lc rgb "red" title sprintf("Média fracasso: %d", m4), \
+	mt w l lw 2 dt 1 lc rgb "brown" title sprintf("Média total: %d", mt), \
+	'' u (($2+$3+$4)/3.0):xtic(1) w l lw 2 lc rgb "black" title 'Média por semana'
