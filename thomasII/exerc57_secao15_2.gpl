@@ -1,0 +1,20 @@
+#gnuplot não funciona bem para plots misturados com 3D e 2D
+
+set contour base
+set hidden3d
+set isosamples 50, 50
+set surface
+set view 60, 30
+set dgrid3d 30, 30
+set pm3d at b
+set cntrparam levels auto 5
+
+unset parametric
+splot x**2 + y**2
+
+set parametric
+set trange [-2:2]
+
+replot t, t, 0 w l lw 2 lc rgb "red" title "y = x", \
+	0, t, 0 w l lw 2 lc rgb "blue" title "x = 0", \
+	t, 2 - t, 0 w l lw 2 lc rgb "green" title "x + y = 2"
