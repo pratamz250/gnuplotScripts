@@ -1,0 +1,11 @@
+set contour base
+set hidden3d
+set isosamples 50, 50
+set surface
+set view 60, 30
+set dgrid3d 30, 30
+#set pm3d at b
+set cntrparam levels auto 5
+
+splot x**2 + 3*y**2, \
+	8 - x**2 - y**2
