@@ -1,0 +1,14 @@
+set contour base
+set hidden3d
+set isosamples 50, 50
+set surface
+set view 60, 30
+set dgrid3d 30, 30
+#set pm3d at b
+set cntrparam levels auto 5
+
+#splot (x**2 + y**2 <= 1 ?  sqrt(1 - x**2 - y**2) : 1/0) with lines, \
+#(x**2 + y**2 <= 1 ? -sqrt(1 - x**2 - y**2) : 1/0) with lines
+
+splot sqrt(1 - x**2 - y**2) with lines, \
+	-sqrt(1 - x**2 - y**2) with lines
