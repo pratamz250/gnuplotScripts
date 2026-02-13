@@ -1,0 +1,31 @@
+set xlabel "x"
+set ylabel "f(x)"
+
+set xrange [-10:10]
+set yrange [-20:20]
+
+set samples 100000
+set xzeroaxis
+set yzeroaxis
+set key left top
+
+set title "Addition law exemple on elliptic curve"
+
+f1(x) = (x**3 - 7*x + 10 >= 0) ? sqrt(x**3 - 7*x + 10) : 1/0
+f2(x) = (x**3 - 7*x + 10 >= 0) ? -sqrt(x**3 - 7*x + 10) : 1/0
+f3(x) = x + 1
+f4(x) = x/3 + 3
+
+#Dados inline
+$dados <<EOD
+-3	-2
+-3	2
+1/9	82/27
+1/9	-82/27
+EOD
+
+plot $dados u 1:2 w p pt 7 ps 2 notitle, \
+	f1(x) w l lw 2 lc rgb "blue" title "y^2 = x^3 - 7x + 10", \
+	f2(x) w l lw 2 lc rgb "blue" notitle, \
+	f3(x) w l lw 2 title "y = x + 1", \
+	f4(x) w l lw 2 lc rgb "pink" title "y = x/3 + 3"
