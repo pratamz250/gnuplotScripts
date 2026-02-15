@@ -1,0 +1,15 @@
+set xlabel "x"
+set ylabel "f(x)"
+
+set xzeroaxis
+set yzeroaxis
+
+set samples 100000
+
+set title "Nonsigular curve"
+
+f1(x) = (x**3 + 4*x + 4 >= 0) ? sqrt(x**3 + 4*x + 4) : 1/0
+f2(x) = (x**3 + 4*x + 4 >= 0) ? -sqrt(x**3 + 4*x + 4) : 1/0
+
+plot f1(x) w l lw 2 lc rgb "blue" title "y² = x³ + 4x + 4", \
+	f2(x) w l lw 2 lc rgb "blue" notitle
