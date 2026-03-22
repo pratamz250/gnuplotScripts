@@ -1,0 +1,26 @@
+#Essa é uma visualização do porquê 2^10 ~ 10^3
+
+set xlabel "x"
+set ylabel "y"
+
+set xrange [-1:110]
+set yrange [-1:110]
+
+set title "2**10 = 10**3"
+
+#Dados inline
+$dados <<EOD
+0	0
+1	10.0/33.0
+2	20.0/33.0
+3	30.0/33.0
+4	40.0/33.0
+5	50.0/33.0
+10	100.0/33.0
+10	3
+EOD
+
+f(x) = (10.0/33.0)*x
+
+plot f(x) w l lw 2 notitle, \
+	$dados u 1:2 with points pt 7 ps 2 notitle
